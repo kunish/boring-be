@@ -34,6 +34,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .service(api::create)
             .service(api::update_title)
             .service(api::update_body)
+            .service(api::publish)
+            .service(api::unpublish)
             .service(api::delete)
     })
     .bind(("0.0.0.0", 8080))?
