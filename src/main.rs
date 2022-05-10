@@ -14,6 +14,7 @@ extern crate dotenv;
 
 mod actions;
 mod api;
+mod app_config;
 mod models;
 mod schema;
 
@@ -38,13 +39,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             )
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(pool.clone()))
-            .service(api::retrieve)
-            .service(api::create)
-            .service(api::update_title)
-            .service(api::update_body)
-            .service(api::publish)
-            .service(api::unpublish)
-            .service(api::delete)
+            .configure(app_config::config_app)
     })
     .bind(("0.0.0.0", 8080))?
     .run()
