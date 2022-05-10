@@ -32,6 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .app_data(web::Data::new(pool.clone()))
             .service(api::index)
             .service(api::create)
+            .service(api::delete)
     })
     .bind(("0.0.0.0", 8080))?
     .run()
