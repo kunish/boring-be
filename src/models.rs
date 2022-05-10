@@ -12,7 +12,17 @@ pub struct Post {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct NewPost {
+pub struct CreatePost {
     pub title: String,
+    pub body: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UpdatePostTitle {
+    pub title: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UpdatePostBody {
     pub body: String,
 }

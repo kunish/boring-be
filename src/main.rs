@@ -30,8 +30,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         App::new()
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(pool.clone()))
-            .service(api::index)
+            .service(api::retrieve)
             .service(api::create)
+            .service(api::update_title)
+            .service(api::update_body)
             .service(api::delete)
     })
     .bind(("0.0.0.0", 8080))?
