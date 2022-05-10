@@ -1,5 +1,6 @@
 use std::env;
 
+use actix_cors::Cors;
 use actix_web::{middleware, web, App, HttpServer};
 use diesel::{
     r2d2::{self, ConnectionManager},
@@ -28,6 +29,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     HttpServer::new(move || {
         App::new()
+            .wrap(
+                Cors::default()
+                    .allow_any_header()
+                    .allow_any_method()
+                    .allow_any_origin()
+                    .supports_credentials(),
+            )
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(pool.clone()))
             .service(api::retrieve)
